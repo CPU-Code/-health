@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/health.iml" filepath="$PROJECT_DIR$/.idea/health.iml" />
       <module fileurl="file://$PROJECT_DIR$/health_parent/health_common/health_common.iml" filepath="$PROJECT_DIR$/health_parent/health_common/health_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/health_parent/health_interface/health_interface.iml" filepath="$PROJECT_DIR$/health_parent/health_interface/health_interface.iml" />
       <module fileurl="file://$PROJECT_DIR$/health_parent/health_parent.iml" filepath="$PROJECT_DIR$/health_parent/health_parent.iml" />
     </modules>
   </component>

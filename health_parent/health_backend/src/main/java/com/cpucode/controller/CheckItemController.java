@@ -1,6 +1,8 @@
 package com.cpucode.controller;
 
 import com.cpucode.constant.MessageConstant;
+import com.cpucode.entity.PageResult;
+import com.cpucode.entity.QueryPageBean;
 import com.cpucode.entity.Result;
 import com.cpucode.pojo.CheckItem;
 import com.cpucode.service.CheckItemService;
@@ -33,5 +35,18 @@ public class CheckItemController {
         }
 
         return  new Result(true,MessageConstant.ADD_CHECKITEM_SUCCESS);
+    }
+
+    /**
+     * 分页查询
+     */
+    @RequestMapping("/findPage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
+        PageResult pageResult = checkItemService.pageQuery(
+                queryPageBean.getCurrentPage(),
+                queryPageBean.getPageSize(),
+                queryPageBean.getQueryString());
+
+        return pageResult;
     }
 }

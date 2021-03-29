@@ -1,5 +1,6 @@
 package com.cpucode.service;
 
+import com.cpucode.entity.PageResult;
 import com.cpucode.pojo.CheckItem;
 
 /**
@@ -13,4 +14,13 @@ import com.cpucode.pojo.CheckItem;
  */
 public interface CheckItemService {
     public void add(CheckItem checkItem);
+
+    /**
+     * 分页查询方法
+     * @param currentPage
+     * @param pageSize
+     * @param queryString
+     * @return
+     */
+    public PageResult pageQuery(Integer currentPage, Integer pageSize, String queryString);
 }

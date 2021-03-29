@@ -2,8 +2,11 @@ package com.cpucode.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.cpucode.dao.CheckItemDao;
+import com.cpucode.entity.PageResult;
 import com.cpucode.pojo.CheckItem;
 import com.cpucode.service.CheckItemService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -26,5 +29,20 @@ public class CheckItemServiceImpl implements CheckItemService {
      */
     public void add(CheckItem checkItem){
         checkItemDao.add(checkItem);
+    }
+
+    /**
+     * 分页查询方法
+     *
+     * @param currentPage
+     * @param pageSize
+     * @param queryString
+     * @return
+     */
+    public PageResult pageQuery(Integer currentPage, Integer pageSize, String queryString){
+        PageHelper.startPage(currentPage, pageSize);
+        Page<CheckItem> page = checkItemDao.selectByCondition(queryString);
+
+        return new PageResult(page.getTotal(), page.getResult());
     }
 }

@@ -1,6 +1,7 @@
 package com.cpucode.dao;
 
 import com.cpucode.pojo.CheckItem;
+import com.github.pagehelper.Page;
 
 /**
  * 持久层Dao接口
@@ -13,4 +14,6 @@ import com.cpucode.pojo.CheckItem;
  */
 public interface CheckItemDao {
     public void add(CheckItem checkItem);
+
+    public Page<CheckItem> selectByCondition(String queryString);
 }

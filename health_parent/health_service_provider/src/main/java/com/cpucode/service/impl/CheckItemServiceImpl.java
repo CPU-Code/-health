@@ -45,4 +45,21 @@ public class CheckItemServiceImpl implements CheckItemService {
 
         return new PageResult(page.getTotal(), page.getResult());
     }
+
+    /**
+     * 删除
+     * @param id
+     * @throws RuntimeException
+     */
+    public void deleteById(Integer id) throws RuntimeException{
+        //查询当前检查项是否和检查组关联
+        long count = checkItemDao.findCountByCheckItemId(id);
+
+        if(count > 0){
+            //当前检查项被引用，不能删除
+            throw new RuntimeException("当前检查项被引用，不能删除");
+        }
+
+        checkItemDao.deleteById(id);
+    }
 }

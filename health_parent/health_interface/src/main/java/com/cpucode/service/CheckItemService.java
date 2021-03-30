@@ -23,4 +23,11 @@ public interface CheckItemService {
      * @return
      */
     public PageResult pageQuery(Integer currentPage, Integer pageSize, String queryString);
+
+    /**
+     * 删除方法
+     *
+     * @param id
+     */
+    public void deleteById(Integer id);
 }

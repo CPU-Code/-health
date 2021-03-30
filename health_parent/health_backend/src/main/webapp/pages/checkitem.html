@@ -240,11 +240,40 @@
             },
             //钩子函数，VUE对象初始化完成后自动执行
             created() {
+                // VUE对象初始化完成后调用分页查询方法，完成分页查询
                 this.findPage();
             },
             methods: {
                 //编辑
                 handleEdit() {
+                    //表单校验
+                    this.$refs['dataEditForm'].validate((valid)=>{
+                        if(valid){
+                            //表单校验通过，发送请求
+                            axios.post("/checkitem/edit.do",this.formData).then((response)=>{
+                                //隐藏编辑窗口
+                                this.dialogFormVisible4Edit = false;
+                                if(response.data.flag){
+                                    //编辑成功，弹出成功提示信息
+                                    this.$message({
+                                        message: response.data.message,
+                                        type: 'success'
+                                    });
+                                }else {
+                                    //编辑失败，弹出错误提示信息
+                                    this.$message.error(response.data.message);
+                                }
+                            }).finally(()=>{
+                                //重新发送请求查询分页数据
+                                this.findPage();
+                            });
+                        }else {
+                            //表单校验失败
+                            this.$message.error("表单数据校验失败");
+
+                            return false;
+                        }
+                    });
                 },
 
                 //添加
@@ -256,7 +285,7 @@
 							var _this = this;
 
 							//表单数据校验通过，发送ajax请求将表单数据提交到后台
-							axios.post("url",this.formData).then((resp) => {
+							axios.post("/checkitem/add.do",this.formData).then((resp) => {
 								// resp.data = {};
 								if(resp.data.flag){ // 服务器端处理成功
 									_this.$message({
@@ -309,6 +338,19 @@
                 },
                 // 弹出编辑窗口
                 handleUpdate(row) {
+                    //回显数据，发送ajax请求根据ID查询当前检查项数据
+                    axios.get("/checkitem/findById.do?id=" + row.id).then((res)=>{
+                        if(res.data.flag){
+                            //弹出编辑窗口
+                            this.dialogFormVisible4Edit = true;
+
+                            //为模型数据设置值，基于VUE双向数据绑定回显到页面
+                            this.formData = res.data.data;
+                        }else {
+                            //查询失败，弹出提示
+                            this.$message.error(res.data.message);
+                        }
+                    });
                 },
                 //切换页码
                 handleCurrentChange(currentPage) {

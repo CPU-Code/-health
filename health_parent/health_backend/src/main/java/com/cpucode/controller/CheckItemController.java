@@ -50,6 +50,11 @@ public class CheckItemController {
         return pageResult;
     }
 
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
     @RequestMapping("/delete")
     public Result delete(Integer id){
         try{

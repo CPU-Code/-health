@@ -9,6 +9,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * 检查项服务
  *
@@ -69,5 +71,9 @@ public class CheckItemServiceImpl implements CheckItemService {
 
     public CheckItem findById(Integer id) {
         return checkItemDao.findById(id);
+    }
+
+    public List<CheckItem> findAll() {
+        return checkItemDao.findAll();
     }
 }

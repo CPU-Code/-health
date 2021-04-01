@@ -3,6 +3,8 @@ package com.cpucode.service;
 import com.cpucode.entity.PageResult;
 import com.cpucode.pojo.CheckItem;
 
+import java.util.List;
+
 /**
  * 检查项服务接口
  *
@@ -34,4 +36,6 @@ public interface CheckItemService {
     public void edit(CheckItem checkItem);
 
     public CheckItem findById(Integer id);
+
+    public List<CheckItem> findAll();
 }

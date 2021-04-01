@@ -139,6 +139,7 @@
                                     </el-row>
                                 </el-form>
                             </el-tab-pane>
+
                             <el-tab-pane label="检查项信息" name="second">
                                 <div class="checkScrol">
                                     <table class="datatable">
@@ -223,6 +224,7 @@
                                     </el-row>
                                 </el-form>
                             </el-tab-pane>
+
                             <el-tab-pane label="检查项信息" name="second">
                                 <div class="checkScrol">
                                     <table class="datatable">
@@ -355,8 +357,9 @@
             handleCreate() {
                 this.resetForm();
                 this.dialogFormVisible = true;
-                this.activeName = 'first';//默认选中first对应的tab
-                this.checkitemIds = []; //重置选中的检查项
+                this.activeName = 'first';  //默认选中first对应的tab
+                this.checkitemIds = [];     //重置选中的检查项
+
                 //发送ajax请求，查询所有的检查项信息，转为json，赋值给tableData
                 axios.get("/checkitem/findAll.do").then((res) => {
                     if (res.data.flag) {

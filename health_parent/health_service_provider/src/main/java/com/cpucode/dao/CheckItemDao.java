@@ -3,6 +3,8 @@ package com.cpucode.dao;
 import com.cpucode.pojo.CheckItem;
 import com.github.pagehelper.Page;
 
+import java.util.List;
+
 /**
  * 持久层Dao接口
  *
@@ -24,4 +26,6 @@ public interface CheckItemDao {
     public void edit(CheckItem checkItem);
 
     public CheckItem findById(Integer id);
+
+    public List<CheckItem> findAll();
 }

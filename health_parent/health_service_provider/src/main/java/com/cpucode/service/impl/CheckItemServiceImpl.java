@@ -8,6 +8,7 @@ import com.cpucode.service.CheckItemService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,7 +22,11 @@ import java.util.List;
  * @csdn : https://blog.csdn.net/qq_44226094
  */
 @Service(interfaceClass = CheckItemService.class)
+@Transactional
 public class CheckItemServiceImpl implements CheckItemService {
+    /**
+     * 注入DAO对象
+     */
     @Autowired
     CheckItemDao checkItemDao;
 

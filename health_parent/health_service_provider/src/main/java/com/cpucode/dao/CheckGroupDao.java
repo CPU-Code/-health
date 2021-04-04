@@ -1,6 +1,7 @@
 package com.cpucode.dao;
 
 import com.cpucode.pojo.CheckGroup;
+import com.github.pagehelper.Page;
 
 import java.util.Map;
 
@@ -16,4 +17,5 @@ import java.util.Map;
 public interface CheckGroupDao {
     public void add(CheckGroup checkGroup);
     public void setCheckGroupAndCheckItem(Map map);
+    public Page<CheckGroup> selectByCondition(String queryString);
 }

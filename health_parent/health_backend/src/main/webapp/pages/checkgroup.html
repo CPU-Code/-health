@@ -267,19 +267,20 @@
         el: '#app',
         data: {
             activeName: 'first',        //添加/编辑窗口Tab标签名称
-            pagination: {       //分页相关属性
-                currentPage: 1,
-                pageSize: 10,
-                total: 100,
-                queryString: null,
+            pagination: {               //分页相关属性
+                currentPage: 1,         //当前页码
+                pageSize: 10,           //每页显示的记录数
+                total: 100,             //总记录数
+                queryString: null,      //查询条件
             },
-            dataList: [],                   //列表数据
+            dataList: [],                   //当前页要展示的分页列表数据
             formData: {},                   //表单数据
             tableData: [],                  //新增和编辑表单中对应的检查项列表数据
             checkitemIds: [],               //新增和编辑表单中检查项对应的复选框，基于双向绑定可以进行回显和数据提交
             dialogFormVisible: false,       //控制添加窗口显示/隐藏
             dialogFormVisible4Edit: false   //控制编辑窗口显示/隐藏
         },
+        //钩子函数，VUE对象初始化完成后自动执行
         created() {
             //获取储存的当前分页
             this.pagination.currentPage = this.getContextData("currentPage") || 1;
@@ -338,15 +339,15 @@
 
                 //封装分页参数
                 const param = {
-                    currentPage: this.pagination.currentPage,
-                    pageSize: this.pagination.pageSize,
-                    queryString: this.pagination.queryString
+                    currentPage: this.pagination.currentPage,       //页码
+                    pageSize: this.pagination.pageSize,             //每页显示的记录数
+                    queryString: this.pagination.queryString        //查询条件
                 };
                 //发送ajax请求，提交分页相关参数
                 axios.post("/checkgroup/findPage.do", param).then((res) => {
                     //为VUE对象的模型数据赋值，基于双向数据绑定展示到页面
-                    this.dataList = res.data.rows;//当前页展示的数据集合
-                    this.pagination.total = res.data.total;//总数据量
+                    this.dataList = res.data.rows;          //当前页展示的数据集合
+                    this.pagination.total = res.data.total; //总数据量
                 });
             },
             // 重置表单

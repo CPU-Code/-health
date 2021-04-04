@@ -2,6 +2,8 @@ package com.cpucode.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.cpucode.constant.MessageConstant;
+import com.cpucode.entity.PageResult;
+import com.cpucode.entity.QueryPageBean;
 import com.cpucode.entity.Result;
 import com.cpucode.pojo.CheckGroup;
 import com.cpucode.service.CheckGroupService;
@@ -43,5 +45,21 @@ public class CheckGroupController {
 
         //新增成功
         return new Result(true,MessageConstant.ADD_CHECKGROUP_SUCCESS);
+    }
+
+    /**
+     * 分页查询
+     * @param queryPageBean
+     * @return
+     */
+    @RequestMapping("/findPage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
+        PageResult pageResult = checkGroupService.pageQuery(
+                queryPageBean.getCurrentPage(),
+                queryPageBean.getPageSize(),
+                queryPageBean.getQueryString()
+        );
+
+        return pageResult;
     }
 }

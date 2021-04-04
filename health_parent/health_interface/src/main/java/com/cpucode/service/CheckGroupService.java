@@ -1,5 +1,6 @@
 package com.cpucode.service;
 
+import com.cpucode.entity.PageResult;
 import com.cpucode.pojo.CheckGroup;
 
 /**
@@ -11,4 +12,13 @@ import com.cpucode.pojo.CheckGroup;
  */
 public interface CheckGroupService {
     public void add(CheckGroup checkGroup, Integer[] checkitemIds);
+
+    /**
+     * 分页查询
+     * @param currentPage
+     * @param pageSize
+     * @param queryString
+     * @return
+     */
+    public PageResult pageQuery(Integer currentPage, Integer pageSize, String queryString);
 }

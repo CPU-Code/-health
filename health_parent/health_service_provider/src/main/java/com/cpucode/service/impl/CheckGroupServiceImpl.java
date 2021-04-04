@@ -2,8 +2,11 @@ package com.cpucode.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.cpucode.dao.CheckGroupDao;
+import com.cpucode.entity.PageResult;
 import com.cpucode.pojo.CheckGroup;
 import com.cpucode.service.CheckGroupService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,8 +50,10 @@ public class CheckGroupServiceImpl implements CheckGroupService{
      */
     public void setCheckGroupAndCheckItem(Integer checkGroupId, Integer[] checkitemIds){
         if(checkitemIds != null && checkitemIds.length > 0){
+            Map<String,Integer> map = null;
+
             for (Integer checkitemId : checkitemIds){
-                Map<String,Integer> map = new HashMap<>();
+                map = new HashMap<>();
 
                 map.put("checkgroupId",checkGroupId);
                 map.put("checkitemId",checkitemId);
@@ -56,5 +61,20 @@ public class CheckGroupServiceImpl implements CheckGroupService{
                 checkGroupDao.setCheckGroupAndCheckItem(map);
             }
         }
+    }
+
+    /**
+     *
+     * @param currentPage
+     * @param pageSize
+     * @param queryString
+     * @return
+     */
+    public PageResult pageQuery(Integer currentPage, Integer pageSize, String queryString){
+        PageHelper.startPage(currentPage,pageSize);
+
+        Page<CheckGroup> page = checkGroupDao.selectByCondition(queryString);
+
+        return new PageResult(page.getTotal(), page.getResult());
     }
 }

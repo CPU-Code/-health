@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * 检查组管理
  *
@@ -73,12 +75,32 @@ public class CheckGroupController {
         try{
             CheckGroup checkGroup = checkGroupService.findById(id);
             //查询成功
-            return new Result(true,MessageConstant.QUERY_CHECKGROUP_SUCCESS,checkGroup);
+            return new Result(true,MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroup);
         }catch (Exception e){
             e.printStackTrace();
 
             //查询失败
             return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
+
+    /**
+     * 根据检查组ID查询检查组包含的多个检查项ID
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findCheckItemIdsByCheckGroupId")
+    public Result findCheckItemIdsByCheckGroupId(Integer id){
+        try{
+            List<Integer> checkitemIds = checkGroupService.findCheckItemIdsByCheckGroupId(id);
+
+            //查询成功
+            return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, checkitemIds);
+        }catch (Exception e){
+            e.printStackTrace();
+
+            //查询失败
+            return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
         }
     }
 }

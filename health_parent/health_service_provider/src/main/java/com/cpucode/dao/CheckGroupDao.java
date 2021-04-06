@@ -3,6 +3,7 @@ package com.cpucode.dao;
 import com.cpucode.pojo.CheckGroup;
 import com.github.pagehelper.Page;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,4 +21,6 @@ public interface CheckGroupDao {
     public Page<CheckGroup> selectByCondition(String queryString);
 
     public CheckGroup findById(Integer id);
+
+    public List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
 }

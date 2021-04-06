@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -85,5 +86,14 @@ public class CheckGroupServiceImpl implements CheckGroupService{
      */
     public CheckGroup findById(Integer id) {
         return checkGroupDao.findById(id);
+    }
+
+    /**
+     * 根据检查组ID查询关联的检查项ID
+     * @param id
+     * @return
+     */
+    public List<Integer> findCheckItemIdsByCheckGroupId(Integer id) {
+        return checkGroupDao.findCheckItemIdsByCheckGroupId(id);
     }
 }

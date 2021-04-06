@@ -3,6 +3,8 @@ package com.cpucode.service;
 import com.cpucode.entity.PageResult;
 import com.cpucode.pojo.CheckGroup;
 
+import java.util.List;
+
 /**
  * @author : cpucode
  * @date : 2021/4/1
@@ -23,4 +25,6 @@ public interface CheckGroupService {
     public PageResult pageQuery(Integer currentPage, Integer pageSize, String queryString);
 
     public CheckGroup findById(Integer id);
+
+    public List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
 }

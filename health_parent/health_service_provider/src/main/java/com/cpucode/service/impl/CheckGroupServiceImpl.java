@@ -64,7 +64,7 @@ public class CheckGroupServiceImpl implements CheckGroupService{
     }
 
     /**
-     *
+     * 分页查询
      * @param currentPage
      * @param pageSize
      * @param queryString
@@ -76,5 +76,14 @@ public class CheckGroupServiceImpl implements CheckGroupService{
         Page<CheckGroup> page = checkGroupDao.selectByCondition(queryString);
 
         return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    /**
+     * 根据ID查询检查组
+     * @param id
+     * @return
+     */
+    public CheckGroup findById(Integer id) {
+        return checkGroupDao.findById(id);
     }
 }

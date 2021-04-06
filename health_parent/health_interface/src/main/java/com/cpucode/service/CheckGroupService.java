@@ -21,4 +21,6 @@ public interface CheckGroupService {
      * @return
      */
     public PageResult pageQuery(Integer currentPage, Integer pageSize, String queryString);
+
+    public CheckGroup findById(Integer id);
 }

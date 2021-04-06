@@ -62,4 +62,23 @@ public class CheckGroupController {
 
         return pageResult;
     }
+
+    /**
+     * 根据ID查询检查组
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findById")
+    public Result findById(Integer id){
+        try{
+            CheckGroup checkGroup = checkGroupService.findById(id);
+            //查询成功
+            return new Result(true,MessageConstant.QUERY_CHECKGROUP_SUCCESS,checkGroup);
+        }catch (Exception e){
+            e.printStackTrace();
+
+            //查询失败
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
 }

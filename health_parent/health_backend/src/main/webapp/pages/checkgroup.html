@@ -90,7 +90,7 @@
             </div>
             <!-- 新增标签弹层 -->
             <div class="add-form">
-                <el-dialog title="新增检查组" :visible.sync="dialogFormVisible">
+                <el-dialog title="新增检查组" :visible.sync="dialogFormVisible" v-if="dialogFormVisible">
                     <template>
                         <el-tabs v-model="activeName" type="card">
                             <el-tab-pane label="基本信息" name="first">
@@ -175,7 +175,7 @@
 
             <!-- 编辑标签弹层 -->
             <div class="add-form">
-                <el-dialog title="编辑检查组" :visible.sync="dialogFormVisible4Edit">
+                <el-dialog title="编辑检查组" :visible.sync="dialogFormVisible4Edit" v-if="dialogFormVisible4Edit">
                     <template>
                         <el-tabs v-model="activeName" type="card">
                             <el-tab-pane label="基本信息" name="first">
@@ -359,6 +359,7 @@
                 this.resetForm();
                 this.dialogFormVisible = true;
 
+                //发送ajax请求，查询所有的检查项信息，转为json，赋值给tableData
                 this.activeName = 'first';      //默认选中first对应的tab
                 this.checkitemIds = [];         //重置选中的检查项
 
@@ -375,6 +376,40 @@
             },
             // 弹出编辑窗口
             handleUpdate(row) {
+                //弹出编辑窗口
+                this.dialogFormVisible4Edit = true;
+                this.activeName = 'first';
+
+                //发送ajax请求，根据检查组ID查询当前检查组数据，用于基本信息的回显
+                axios.get("/checkgroup/findById.do?id=" + row.id).then((res) => {
+                    if(res.data.flag){
+                        //查询到数据
+                        this.formData = res.data.data;
+                    }else{
+                        //查询数据失败
+                        this.$message.error(res.data.message);
+                    }
+                });
+
+                //发送ajax请求，查询所有的检查项数据，用于展示检查项列表
+                axios.get("/checkitem/findAll.do").then((res) => {
+                    if(res.data.flag){
+                        //查询检查项数据成功
+                        this.tableData = res.data.data;
+
+                        //发送ajax请求，根据检查组ID查询当前检查组包含的检查项ID，用于页面复选框回显
+                        axios.get("/checkgroup/findCheckItemIdsByCheckGroupId.do?id=" + row.id).then((res) => {
+                            if(res.data.flag){
+                                this.checkitemIds = res.data.data;
+                            }else{
+                                this.$message.error(res.data.message);
+                            }
+                        });
+                    }else{
+                        //查询检查项数据失败
+                        this.$message.error(res.data.message);
+                    }
+                });
             },
             //切换页码
             handleCurrentChange(currentPage) {

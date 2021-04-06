@@ -309,6 +309,24 @@
             },
             //编辑
             handleEdit() {
+                //发送ajax请求，将修改后的表单数据（检查组基本信息、勾选的检查项）提交到后台进行处理
+                axios.post("/checkgroup/edit.do?checkitemIds=" + this.checkitemIds, this.formData).then((res) => {
+                    //关闭编辑窗口
+                    this.dialogFormVisible4Edit = false;
+
+                    if(res.data.flag){
+                        //操作成功
+                        this.$message({
+                            type:'success',
+                            message:res.data.message
+                        });
+                    }else{
+                        //操作失败
+                        this.$message.error(res.data.message);
+                    }
+                }).finally(() =>{
+                    this.findPage();
+                });
             },
             //添加
             handleAdd() {

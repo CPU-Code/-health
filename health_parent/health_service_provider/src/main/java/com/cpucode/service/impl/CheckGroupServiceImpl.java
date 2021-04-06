@@ -96,4 +96,21 @@ public class CheckGroupServiceImpl implements CheckGroupService{
     public List<Integer> findCheckItemIdsByCheckGroupId(Integer id) {
         return checkGroupDao.findCheckItemIdsByCheckGroupId(id);
     }
+
+    /**
+     * 编辑检查组信息，同时需要关联检查项
+     * @param checkGroup
+     * @param checkitemIds
+     */
+    public void edit(CheckGroup checkGroup, Integer[] checkitemIds) {
+        //修改检查组基本信息，操作检查组 t_checkgroup 表
+        checkGroupDao.edit(checkGroup);
+
+        //清理当前检查组关联的检查项，操作中间关系表 t_checkgroup_checkitem 表
+        checkGroupDao.deleteAssocication(checkGroup.getId());
+
+        //重新建立当前检查组和检查项的关联关系
+        Integer checkGroupId = checkGroup.getId();
+        this.setCheckGroupAndCheckItem(checkGroupId,checkitemIds);
+    }
 }

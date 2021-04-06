@@ -103,4 +103,25 @@ public class CheckGroupController {
             return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
         }
     }
+
+    /**
+     * 编辑检查组
+     * @param checkGroup
+     * @param checkitemIds
+     * @return
+     */
+    @RequestMapping("/edit")
+    public Result edit(@RequestBody CheckGroup checkGroup,Integer[] checkitemIds){
+        try{
+            checkGroupService.edit(checkGroup,checkitemIds);
+        }catch (Exception e){
+            e.printStackTrace();
+
+            //新增失败
+            return new Result(false, MessageConstant.EDIT_CHECKGROUP_FAIL);
+        }
+
+        //新增成功
+        return new Result(true,MessageConstant.EDIT_CHECKGROUP_SUCCESS);
+    }
 }

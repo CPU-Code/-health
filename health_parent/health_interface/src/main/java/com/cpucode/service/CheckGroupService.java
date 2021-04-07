@@ -29,4 +29,6 @@ public interface CheckGroupService {
     public List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
 
     public void edit(CheckGroup checkGroup, Integer[] checkitemIds);
+
+    public List<CheckGroup> findAll();
 }

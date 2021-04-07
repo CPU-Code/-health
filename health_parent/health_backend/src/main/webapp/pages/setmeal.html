@@ -273,9 +273,25 @@
                 },
                 // 重置表单
                 resetForm() {
+                    this.formData = {};
+                    this.activeName = 'first';
+                    this.checkgroupIds = [];
+                    this.imageUrl = null;
                 },
                 // 弹出添加窗口
                 handleCreate() {
+                    this.dialogFormVisible = true;
+                    this.resetForm();
+
+                    //发送ajax请，查询所有的检查组数据，转为json展示到当前新增窗口中
+                    axios.get("/checkgroup/findAll.do").then((res)=> {
+                        if(res.data.flag){
+                            //查询成功
+                            this.tableData = res.data.data;
+                        }else {
+                            this.$message.error(res.data.message);
+                        }
+                    });
                 },
                 //切换页码
                 handleCurrentChange(currentPage) {

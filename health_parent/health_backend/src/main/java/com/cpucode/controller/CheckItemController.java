@@ -45,7 +45,7 @@ public class CheckItemController {
             return new Result(false, MessageConstant.ADD_CHECKITEM_FAIL);
         }
 
-        return  new Result(true,MessageConstant.ADD_CHECKITEM_SUCCESS);
+        return  new Result(true, MessageConstant.ADD_CHECKITEM_SUCCESS);
     }
 
     /**

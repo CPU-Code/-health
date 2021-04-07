@@ -34,6 +34,7 @@ public class CheckGroupServiceImpl implements CheckGroupService{
      * @param checkGroup
      * @param checkitemIds
      */
+    @Override
     public void add(CheckGroup checkGroup, Integer[] checkitemIds){
         //新增检查组，操作t_checkgroup表
         checkGroupDao.add(checkGroup);
@@ -71,6 +72,7 @@ public class CheckGroupServiceImpl implements CheckGroupService{
      * @param queryString
      * @return
      */
+    @Override
     public PageResult pageQuery(Integer currentPage, Integer pageSize, String queryString){
         PageHelper.startPage(currentPage,pageSize);
 
@@ -84,6 +86,7 @@ public class CheckGroupServiceImpl implements CheckGroupService{
      * @param id
      * @return
      */
+    @Override
     public CheckGroup findById(Integer id) {
         return checkGroupDao.findById(id);
     }
@@ -93,6 +96,7 @@ public class CheckGroupServiceImpl implements CheckGroupService{
      * @param id
      * @return
      */
+    @Override
     public List<Integer> findCheckItemIdsByCheckGroupId(Integer id) {
         return checkGroupDao.findCheckItemIdsByCheckGroupId(id);
     }
@@ -102,6 +106,7 @@ public class CheckGroupServiceImpl implements CheckGroupService{
      * @param checkGroup
      * @param checkitemIds
      */
+    @Override
     public void edit(CheckGroup checkGroup, Integer[] checkitemIds) {
         //修改检查组基本信息，操作检查组 t_checkgroup 表
         checkGroupDao.edit(checkGroup);

@@ -46,7 +46,7 @@ public class CheckGroupController {
         }
 
         //新增成功
-        return new Result(true,MessageConstant.ADD_CHECKGROUP_SUCCESS);
+        return new Result(true, MessageConstant.ADD_CHECKGROUP_SUCCESS);
     }
 
     /**
@@ -75,7 +75,7 @@ public class CheckGroupController {
         try{
             CheckGroup checkGroup = checkGroupService.findById(id);
             //查询成功
-            return new Result(true,MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroup);
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroup);
         }catch (Exception e){
             e.printStackTrace();
 
@@ -113,7 +113,7 @@ public class CheckGroupController {
     @RequestMapping("/edit")
     public Result edit(@RequestBody CheckGroup checkGroup,Integer[] checkitemIds){
         try{
-            checkGroupService.edit(checkGroup,checkitemIds);
+            checkGroupService.edit(checkGroup, checkitemIds);
         }catch (Exception e){
             e.printStackTrace();
 
@@ -122,6 +122,6 @@ public class CheckGroupController {
         }
 
         //新增成功
-        return new Result(true,MessageConstant.EDIT_CHECKGROUP_SUCCESS);
+        return new Result(true, MessageConstant.EDIT_CHECKGROUP_SUCCESS);
     }
 }

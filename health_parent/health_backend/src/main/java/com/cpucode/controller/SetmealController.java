@@ -4,9 +4,11 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.cpucode.constant.MessageConstant;
 import com.cpucode.constant.RedisConstant;
 import com.cpucode.entity.Result;
+import com.cpucode.pojo.Setmeal;
 import com.cpucode.service.SetmealService;
 import com.cpucode.utils.QiniuUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,5 +69,24 @@ public class SetmealController {
 
         //图片上传成功
         return new Result(true, MessageConstant.PIC_UPLOAD_SUCCESS, fileName);
+    }
+
+    /**
+     * 新增
+     * @param setmeal
+     * @param checkgroupIds
+     * @return
+     */
+    @RequestMapping("/add")
+    public Result add(@RequestBody Setmeal setmeal, Integer[] checkgroupIds){
+        try {
+            setmealService.add(setmeal,checkgroupIds);
+        }catch (Exception e){
+            //新增套餐失败
+            return new Result(false, MessageConstant.ADD_SETMEAL_FAIL);
+        }
+
+        //新增套餐成功
+        return new Result(true, MessageConstant.ADD_SETMEAL_SUCCESS);
     }
 }

@@ -60,10 +60,12 @@ public class SetmealController {
         try {
             //将文件上传到七牛云服务器
             QiniuUtils.upload2Qiniu(imgFile.getBytes(), fileName);
-            jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_RESOURCES, fileName);
 
+            //将上传图片名称存入Redis，基于Redis的Set集合存储
+            jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_RESOURCES, fileName);
         } catch (IOException e) {
             e.printStackTrace();
+            //图片上传失败
             return new Result(false, MessageConstant.PIC_UPLOAD_FAIL);
         }
 
@@ -80,7 +82,7 @@ public class SetmealController {
     @RequestMapping("/add")
     public Result add(@RequestBody Setmeal setmeal, Integer[] checkgroupIds){
         try {
-            setmealService.add(setmeal,checkgroupIds);
+            setmealService.add(setmeal, checkgroupIds);
         }catch (Exception e){
             //新增套餐失败
             return new Result(false, MessageConstant.ADD_SETMEAL_FAIL);

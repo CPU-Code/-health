@@ -1,5 +1,6 @@
 package com.cpucode.service;
 
+import com.cpucode.entity.PageResult;
 import com.cpucode.pojo.Setmeal;
 
 /**
@@ -13,4 +14,6 @@ import com.cpucode.pojo.Setmeal;
  */
 public interface SetmealService {
     public void add(Setmeal setmeal, Integer[] checkgroupIds);
+
+    public PageResult pageQuery(Integer currentPage, Integer pageSize, String queryString);
 }

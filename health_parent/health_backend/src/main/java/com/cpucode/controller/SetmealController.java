@@ -3,6 +3,8 @@ package com.cpucode.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.cpucode.constant.MessageConstant;
 import com.cpucode.constant.RedisConstant;
+import com.cpucode.entity.PageResult;
+import com.cpucode.entity.QueryPageBean;
 import com.cpucode.entity.Result;
 import com.cpucode.pojo.Setmeal;
 import com.cpucode.service.SetmealService;
@@ -90,5 +92,22 @@ public class SetmealController {
 
         //新增套餐成功
         return new Result(true, MessageConstant.ADD_SETMEAL_SUCCESS);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param queryPageBean
+     * @return
+     */
+    @RequestMapping("/findPage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
+        PageResult pageResult = setmealService.pageQuery(
+            queryPageBean.getCurrentPage(),
+            queryPageBean.getPageSize(),
+            queryPageBean.getQueryString()
+        );
+
+        return pageResult;
     }
 }

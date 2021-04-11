@@ -1,6 +1,7 @@
 package com.cpucode.dao;
 
 import com.cpucode.pojo.Setmeal;
+import com.github.pagehelper.Page;
 
 import java.util.Map;
 
@@ -14,4 +15,5 @@ import java.util.Map;
 public interface SetmealDao {
     public void add(Setmeal setmeal);
     public void setSetmealAndCheckGroup(Map<String, Integer> map);
+    public Page<Setmeal> findByCondition(String queryString);
 }

@@ -3,8 +3,11 @@ package com.cpucode.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.cpucode.constant.RedisConstant;
 import com.cpucode.dao.SetmealDao;
+import com.cpucode.entity.PageResult;
 import com.cpucode.pojo.Setmeal;
 import com.cpucode.service.SetmealService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.JedisPool;
@@ -76,4 +79,19 @@ public class SetmealServiceImpl implements SetmealService {
     private void savePic2Redis(String pic){
         jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_DB_RESOURCES, pic);
     }
+
+    /**
+     * 分页查询
+     * @param currentPage
+     * @param pageSize
+     * @param queryString
+     * @return
+     */
+    public PageResult pageQuery(Integer currentPage, Integer pageSize, String queryString) {
+        PageHelper.startPage(currentPage, pageSize);
+        Page<Setmeal> page = setmealDao.findByCondition(queryString);
+
+        return new PageResult(page.getTotal(), page.getResult());
+    }
+
 }
